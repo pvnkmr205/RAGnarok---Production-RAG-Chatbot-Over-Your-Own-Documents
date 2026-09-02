@@ -6,7 +6,7 @@
 - [x] Checkpoint 2 — 30-question evaluation set written (`eval_questions.json`)
 - [x] Checkpoint 3 — baseline retrieval hit-rate: **90.0% (27/30)**
 - [x] Checkpoint 4 — chunking comparison: **96.7% (29/30)** with 1500/300 chunks
-- [ ] Checkpoint 5 — hybrid retrieval + re-ranking
+- [x] Checkpoint 5 — hybrid retrieval (BM25 + vector) + LLM re-ranking implemented, full eval pending
 - [ ] Checkpoint 6 — citations + refusal handling
 - [ ] Checkpoint 7 — FastAPI wrapper + cost tracking
 - [ ] Checkpoint 8 — UI, deploy, demo video
@@ -22,7 +22,7 @@ Two pipelines:
 `fastapi_docs/*.md` → chunk (1500 chars, 300 overlap) → embed (OpenRouter, `text-embedding-3-small`) → store (`chunks.json` + `embeddings.npy`)
  
 **Query (every question)**
-question → embed → cosine similarity search (top 5) → build prompt with retrieved context → LLM answers (OpenRouter, `gpt-4o-mini`)
+question → embed + BM25 keyword search (candidates from both) → LLM re-ranks shortlist in small batches → build prompt with re-ranked context → LLM answers (OpenRouter, `gpt-4o-mini`)
  
 ## Setup
  
@@ -76,7 +76,9 @@ The one remaining miss (Q15) is not a chunking problem: `tutorial/dependencies/i
 |---|---|---|---|---|
 | Vector store | Chroma, Qdrant, pgvector, plain NumPy | Plain NumPy array + JSON | At ~1,900 chunks, brute-force cosine similarity takes under 1ms -- a dedicated vector DB solves a scale problem this project doesn't have. Also sidesteps an unresolved Windows-native crash in Chroma's query engine. | Metadata filtering, incremental updates, graceful scaling past ~100k+ vectors |
 | Chunk size/overlap | 1000/200, 500/100, 1500/300 | 1500/300 | Measured 96.7% vs 90.0% hit-rate on the 30-question eval set -- more context per chunk meant fewer facts split across a boundary | Slightly more tokens per chunk sent to the LLM at query time (cost/latency) |
+| Re-ranker | Local cross-encoder (sentence-transformers/torch), LLM-based scoring via OpenRouter | Local cross-encoder | Real relevance scoring on isolated (question, chunk) pairs, no batching risk, no per-call API cost or rate limits. Getting it running on Windows required five sequential fixes: VC++ Redistributable (fixed a native DLL init crash, `WinError 1114`), forcing `torch>=2.5` (transformers required it), downgrading to `torch==2.3.1` + `numpy<2` (an ABI mismatch the other direction), then pinning `scipy<1.14` and `scikit-learn<1.5` (their own ABI conflict with that numpy version). All five are pinned exactly in `requirements.txt`. An LLM-based scorer (via OpenRouter, no extra ML dependencies) was fully built and tested as a fallback along the way, and worked correctly once two of its own bugs were fixed: passage truncation silently hiding the answer, and batch sizes above ~10 candidates causing the model to collapse to near-uniform 0 scores | A precisely-pinned, fragile dependency chain that could break again on a different machine or Python version -- the LLM-based fallback remains available if this setup doesn't reproduce elsewhere |
 | LLM/embedding provider | OpenAI direct, Anthropic direct, OpenRouter | OpenRouter | One API key covers both chat and embeddings; models are swappable via `.env` without touching code | Slightly higher per-call latency than calling providers directly |
+ 
 
 ## Roadmap
 
