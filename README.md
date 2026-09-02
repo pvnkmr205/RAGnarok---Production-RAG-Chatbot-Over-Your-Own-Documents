@@ -6,7 +6,7 @@
 - [x] Checkpoint 2 — 30-question evaluation set written (`eval_questions.json`)
 - [x] Checkpoint 3 — baseline retrieval hit-rate: **90.0% (27/30)**
 - [x] Checkpoint 4 — chunking comparison: **96.7% (29/30)** with 1500/300 chunks
-- [x] Checkpoint 5 — hybrid retrieval (BM25 + vector) + LLM re-ranking implemented, full eval pending
+- [x] Checkpoint 5 — hybrid retrieval + cross-encoder re-ranking: tested, **underperformed** (86.7% vs 96.7%), not adopted -- see below
 - [ ] Checkpoint 6 — citations + refusal handling
 - [ ] Checkpoint 7 — FastAPI wrapper + cost tracking
 - [ ] Checkpoint 8 — UI, deploy, demo video
@@ -68,7 +68,20 @@ Tested 3 chunk_size/overlap configs against the identical 30-question eval set, 
  
 Larger chunks won clearly -- more surrounding context per chunk meant fewer relevant facts got isolated or split across a boundary. Adopted as the new production config in `ingest.py`.
  
-The one remaining miss (Q15) is not a chunking problem: `tutorial/dependencies/index.md` is long, gets split into many chunks, and its generic "dependency" content statistically crowds out the more specific sibling file that actually has the answer. No chunk size fixes that -- it needs retrieval that also rewards exact keyword overlap (e.g. the literal word "class"), which is what Checkpoint 5 is for.
+The one remaining miss (Q15) is not a chunking problem: `tutorial/dependencies/index.md` is long, gets split into many chunks, and its generic "dependency" content statistically crowds out the more specific sibling file that actually has the answer. No chunk size fixes that -- it needs retrieval that also rewards exact keyword overlap (e.g. the literal word "class"), which is what Checkpoint 5 was for.
+ 
+## Hybrid retrieval + re-ranking experiment (Checkpoint 5)
+ 
+Built `query_hybrid.py`: BM25 keyword search alongside vector search (candidates unioned), re-ranked by a local cross-encoder (`cross-encoder/ms-marco-MiniLM-L-6-v2`). Measured against the same 30-question eval set:
+ 
+| Pipeline | Hit-rate | Misses |
+|---|---|---|
+| **Production (`query.py`): pure vector search** | **96.7% (29/30)** | 15 |
+| Experiment (`query_hybrid.py`): hybrid + cross-encoder | 86.7% (26/30) | 1, 4, 8, 15 |
+ 
+Hybrid search did not fix Q15 (the question it was specifically built for) and regressed three previously-easy questions. Working theory: BM25 pulls in a noisier ~20-30 candidate pool (matching generic shared words like "FastAPI" or "parameter"), and the cross-encoder -- a small, general-purpose reranking model -- isn't consistently strong enough to re-sort that wider, noisier pool as reliably as pure vector search's cleaner top-5. A properly-batched LLM-based reranker, tested earlier in the same investigation, did score Q15's correct chunk 10/10 -- suggesting the bottleneck is specifically the small cross-encoder's judgment quality on this corpus, not the hybrid-retrieval concept itself.
+ 
+**Decision: kept `query.py` (pure vector search) as production.** The measured result didn't support adopting the more complex pipeline. `query_hybrid.py` and `requirements-hybrid.txt` are preserved for reference, not deleted -- getting the cross-encoder running on Windows alone surfaced 5 sequential native-dependency conflicts (see Key decisions), all fully diagnosed and fixed, which is real, demonstrable engineering work even though the end result wasn't adopted.
  
 ## Key decisions
  
@@ -76,7 +89,7 @@ The one remaining miss (Q15) is not a chunking problem: `tutorial/dependencies/i
 |---|---|---|---|---|
 | Vector store | Chroma, Qdrant, pgvector, plain NumPy | Plain NumPy array + JSON | At ~1,900 chunks, brute-force cosine similarity takes under 1ms -- a dedicated vector DB solves a scale problem this project doesn't have. Also sidesteps an unresolved Windows-native crash in Chroma's query engine. | Metadata filtering, incremental updates, graceful scaling past ~100k+ vectors |
 | Chunk size/overlap | 1000/200, 500/100, 1500/300 | 1500/300 | Measured 96.7% vs 90.0% hit-rate on the 30-question eval set -- more context per chunk meant fewer facts split across a boundary | Slightly more tokens per chunk sent to the LLM at query time (cost/latency) |
-| Re-ranker | Local cross-encoder (sentence-transformers/torch), LLM-based scoring via OpenRouter | Local cross-encoder | Real relevance scoring on isolated (question, chunk) pairs, no batching risk, no per-call API cost or rate limits. Getting it running on Windows required five sequential fixes: VC++ Redistributable (fixed a native DLL init crash, `WinError 1114`), forcing `torch>=2.5` (transformers required it), downgrading to `torch==2.3.1` + `numpy<2` (an ABI mismatch the other direction), then pinning `scipy<1.14` and `scikit-learn<1.5` (their own ABI conflict with that numpy version). All five are pinned exactly in `requirements.txt`. An LLM-based scorer (via OpenRouter, no extra ML dependencies) was fully built and tested as a fallback along the way, and worked correctly once two of its own bugs were fixed: passage truncation silently hiding the answer, and batch sizes above ~10 candidates causing the model to collapse to near-uniform 0 scores | A precisely-pinned, fragile dependency chain that could break again on a different machine or Python version -- the LLM-based fallback remains available if this setup doesn't reproduce elsewhere |
+| Re-ranker (experimental, not production) | Local cross-encoder (sentence-transformers/torch), LLM-based scoring via OpenRouter | Neither adopted -- production stays on pure vector search (see "Hybrid retrieval experiment" above) | Cross-encoder: got working after 5 sequential Windows dependency fixes (VC++ Redistributable for a DLL crash, forcing then un-forcing a torch version, numpy/scipy/scikit-learn ABI pins) but measured worse than the simpler pipeline (86.7% vs 96.7%). LLM-based scoring: fully worked once two bugs were fixed (600-char truncation hiding answers; batches over ~10 candidates causing score collapse), never got a full eval run in before switching approaches | A fragile, precisely-pinned dependency chain (cross-encoder) and an untested-at-scale alternative (LLM scoring) -- both preserved in `query_hybrid.py` history rather than adopted |
 | LLM/embedding provider | OpenAI direct, Anthropic direct, OpenRouter | OpenRouter | One API key covers both chat and embeddings; models are swappable via `.env` without touching code | Slightly higher per-call latency than calling providers directly |
  
 
