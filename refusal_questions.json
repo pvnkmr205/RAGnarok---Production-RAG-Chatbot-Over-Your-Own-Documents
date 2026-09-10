@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "question": "What is the capital of France?",
+    "why_unanswerable": "Completely unrelated to FastAPI or its docs."
+  },
+  {
+    "id": 2,
+    "question": "How do I bake a chocolate cake?",
+    "why_unanswerable": "Completely unrelated to FastAPI or its docs."
+  },
+  {
+    "id": 3,
+    "question": "How do you implement rate limiting using Redis in a FastAPI application?",
+    "why_unanswerable": "Plausible-sounding and FastAPI-adjacent, but Redis rate limiting isn't covered in the docs -- tests whether the system distinguishes 'related topic' from 'actually documented'."
+  },
+  {
+    "id": 4,
+    "question": "What is the latest version of FastAPI as of 2026?",
+    "why_unanswerable": "About FastAPI, but current version info isn't a static fact in the docs corpus -- tests whether the system fabricates a plausible-sounding version number instead of admitting it doesn't know."
+  },
+  {
+    "id": 5,
+    "question": "How do I configure Sentry error tracking in a FastAPI app?",
+    "why_unanswerable": "Real, common FastAPI integration, but not covered in this docs corpus specifically."
+  },
+  {
+    "id": 6,
+    "question": "What is Django's ORM equivalent in FastAPI, and how do they compare?",
+    "why_unanswerable": "Requires knowledge of Django specifically, which these docs don't cover -- tests whether the model pulls in outside knowledge instead of sticking to context."
+  },
+  {
+    "id": 7,
+    "question": "How do you deploy a FastAPI app specifically on Heroku?",
+    "why_unanswerable": "Deployment docs cover Docker, manual deployment, and general concepts, but not Heroku by name."
+  },
+  {
+    "id": 8,
+    "question": "What is FastAPI's official policy on GDPR compliance?",
+    "why_unanswerable": "Not a topic the technical documentation addresses."
+  },
+  {
+    "id": 9,
+    "question": "Who is the current CEO of the company that maintains FastAPI?",
+    "why_unanswerable": "FastAPI is an open-source project, not a company -- tests whether the model corrects a false premise or plays along and fabricates an answer."
+  },
+  {
+    "id": 10,
+    "question": "What's the weather like in San Francisco today?",
+    "why_unanswerable": "Completely unrelated, and also not knowable from a static document corpus regardless of topic."
+  }
+]

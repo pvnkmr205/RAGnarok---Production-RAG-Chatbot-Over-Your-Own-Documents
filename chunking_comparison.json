@@ -1,0 +1,30 @@
+[
+  {
+    "config": "baseline (1000/200)",
+    "num_chunks": 1904,
+    "hit_rate": 0.9,
+    "miss_ids": [
+      4,
+      15,
+      23
+    ]
+  },
+  {
+    "config": "smaller (500/100)",
+    "num_chunks": 3728,
+    "hit_rate": 0.9,
+    "miss_ids": [
+      5,
+      15,
+      26
+    ]
+  },
+  {
+    "config": "larger (1500/300)",
+    "num_chunks": 1293,
+    "hit_rate": 0.9666666666666667,
+    "miss_ids": [
+      15
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.env
+fastapi_docs/
+.pytest_cache/
+*.egg-info/

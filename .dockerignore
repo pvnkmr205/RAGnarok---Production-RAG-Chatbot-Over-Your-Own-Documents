@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.git/
+fastapi_docs/
+query_hybrid.py
+requirements-hybrid.txt
+eval_results.json
+chunking_comparison.json
+refusal_results.json

@@ -1,0 +1,425 @@
+{
+  "hit_rate": 0.9666666666666667,
+  "results": [
+    {
+      "id": 1,
+      "question": "What is FastAPI built on top of?",
+      "expected_source": "index.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "index.md",
+        "index.md",
+        "about/index.md",
+        "deployment/index.md",
+        "features.md"
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Why is FastAPI described as high performance?",
+      "expected_source": "index.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "index.md",
+        "index.md",
+        "deployment/index.md",
+        "benchmarks.md",
+        "alternatives.md"
+      ]
+    },
+    {
+      "id": 3,
+      "question": "What two open API standards is FastAPI fully compatible with?",
+      "expected_source": "index.md",
+      "hit": true,
+      "rank": 2,
+      "retrieved_sources": [
+        "features.md",
+        "index.md",
+        "index.md",
+        "alternatives.md",
+        "alternatives.md"
+      ]
+    },
+    {
+      "id": 4,
+      "question": "What's the minimum needed to create and run a FastAPI app locally?",
+      "expected_source": "tutorial/first-steps.md",
+      "hit": true,
+      "rank": 3,
+      "retrieved_sources": [
+        "tutorial/index.md",
+        "fastapi-cli.md",
+        "tutorial/first-steps.md",
+        "tutorial/index.md",
+        "deployment/index.md"
+      ]
+    },
+    {
+      "id": 5,
+      "question": "How do you add type validation to a path parameter?",
+      "expected_source": "tutorial/path-params.md",
+      "hit": true,
+      "rank": 2,
+      "retrieved_sources": [
+        "tutorial/path-params-numeric-validations.md",
+        "tutorial/path-params.md",
+        "tutorial/query-params-str-validations.md",
+        "tutorial/query-params-str-validations.md",
+        "tutorial/path-params-numeric-validations.md"
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What happens if a client sends a value that cannot be converted to a path parameter's declared type?",
+      "expected_source": "tutorial/path-params.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/path-params.md",
+        "advanced/path-operation-advanced-configuration.md",
+        "tutorial/path-params.md",
+        "tutorial/response-model.md",
+        "tutorial/path-params-numeric-validations.md"
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Which FastAPI function adds metadata and numeric validation constraints to a path parameter?",
+      "expected_source": "tutorial/path-params-numeric-validations.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/path-params-numeric-validations.md",
+        "tutorial/metadata.md",
+        "tutorial/query-params-str-validations.md",
+        "tutorial/path-params.md",
+        "tutorial/query-params-str-validations.md"
+      ]
+    },
+    {
+      "id": 8,
+      "question": "How does FastAPI decide a function parameter is a query parameter rather than a path parameter?",
+      "expected_source": "tutorial/query-params.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/query-params.md",
+        "tutorial/query-params.md",
+        "reference/parameters.md",
+        "tutorial/body.md",
+        "tutorial/query-params.md"
+      ]
+    },
+    {
+      "id": 9,
+      "question": "How do you enforce a maximum length on an optional string query parameter?",
+      "expected_source": "tutorial/query-params-str-validations.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/query-params-str-validations.md",
+        "tutorial/query-params-str-validations.md",
+        "tutorial/query-params-str-validations.md",
+        "tutorial/query-params-str-validations.md",
+        "tutorial/query-params-str-validations.md"
+      ]
+    },
+    {
+      "id": 10,
+      "question": "How do you declare a request body in FastAPI?",
+      "expected_source": "tutorial/body.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/body.md",
+        "tutorial/body.md",
+        "tutorial/body-multiple-params.md",
+        "tutorial/request-forms.md",
+        "tutorial/request-forms.md"
+      ]
+    },
+    {
+      "id": 11,
+      "question": "What does the response_model parameter actually do?",
+      "expected_source": "tutorial/response-model.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/response-model.md",
+        "tutorial/response-model.md",
+        "tutorial/response-model.md",
+        "tutorial/response-model.md",
+        "tutorial/response-model.md"
+      ]
+    },
+    {
+      "id": 12,
+      "question": "How do you set a custom HTTP status code for a successful response?",
+      "expected_source": "tutorial/response-status-code.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/response-status-code.md",
+        "advanced/response-change-status-code.md",
+        "advanced/response-change-status-code.md",
+        "tutorial/response-status-code.md",
+        "tutorial/response-status-code.md"
+      ]
+    },
+    {
+      "id": 13,
+      "question": "How do you return an error response like a 404 to the client?",
+      "expected_source": "tutorial/handling-errors.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/handling-errors.md",
+        "tutorial/response-status-code.md",
+        "tutorial/frontend.md",
+        "advanced/security/http-basic-auth.md",
+        "how-to/authentication-error-status-code.md"
+      ]
+    },
+    {
+      "id": 14,
+      "question": "What is FastAPI's dependency injection system mainly used for?",
+      "expected_source": "tutorial/dependencies/index.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/dependencies/index.md",
+        "tutorial/dependencies/index.md",
+        "tutorial/dependencies/index.md",
+        "index.md",
+        "features.md"
+      ]
+    },
+    {
+      "id": 15,
+      "question": "Besides plain functions, what else can be used as a FastAPI dependency?",
+      "expected_source": "tutorial/dependencies/classes-as-dependencies.md",
+      "hit": false,
+      "rank": null,
+      "retrieved_sources": [
+        "async.md",
+        "tutorial/dependencies/index.md",
+        "tutorial/dependencies/index.md",
+        "advanced/advanced-dependencies.md",
+        "tutorial/dependencies/index.md"
+      ]
+    },
+    {
+      "id": 16,
+      "question": "Can a FastAPI dependency itself depend on another dependency?",
+      "expected_source": "tutorial/dependencies/sub-dependencies.md",
+      "hit": true,
+      "rank": 2,
+      "retrieved_sources": [
+        "tutorial/dependencies/index.md",
+        "tutorial/dependencies/sub-dependencies.md",
+        "reference/dependencies.md",
+        "tutorial/dependencies/dependencies-with-yield.md",
+        "tutorial/dependencies/index.md"
+      ]
+    },
+    {
+      "id": 17,
+      "question": "What security protocol does FastAPI use to implement username/password authentication between a frontend and backend?",
+      "expected_source": "tutorial/security/first-steps.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/security/first-steps.md",
+        "tutorial/security/oauth2-jwt.md",
+        "tutorial/security/first-steps.md",
+        "tutorial/security/index.md",
+        "reference/security/index.md"
+      ]
+    },
+    {
+      "id": 18,
+      "question": "What Python package do the FastAPI docs use to generate and verify JWT tokens?",
+      "expected_source": "tutorial/security/oauth2-jwt.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/security/oauth2-jwt.md",
+        "index.md",
+        "index.md",
+        "alternatives.md",
+        "features.md"
+      ]
+    },
+    {
+      "id": 19,
+      "question": "How does a get_current_user dependency typically determine the user's identity?",
+      "expected_source": "tutorial/security/get-current-user.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/security/get-current-user.md",
+        "tutorial/security/get-current-user.md",
+        "advanced/security/oauth2-scopes.md",
+        "advanced/security/oauth2-scopes.md",
+        "release-notes.md"
+      ]
+    },
+    {
+      "id": 20,
+      "question": "How do you create custom middleware in FastAPI?",
+      "expected_source": "tutorial/middleware.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/middleware.md",
+        "advanced/middleware.md",
+        "reference/middleware.md",
+        "advanced/middleware.md",
+        "tutorial/cors.md"
+      ]
+    },
+    {
+      "id": 21,
+      "question": "How do you enable CORS for specific frontend origins in FastAPI?",
+      "expected_source": "tutorial/cors.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "tutorial/cors.md",
+        "tutorial/cors.md",
+        "tutorial/cors.md",
+        "tutorial/cors.md",
+        "tutorial/cors.md"
+      ]
+    },
+    {
+      "id": 22,
+      "question": "What FastAPI utility do you add as a path operation function parameter to schedule a fire-and-forget task, like sending an email, to run once the response has already been returned?",
+      "expected_source": "tutorial/background-tasks.md",
+      "hit": true,
+      "rank": 2,
+      "retrieved_sources": [
+        "reference/background.md",
+        "tutorial/background-tasks.md",
+        "tutorial/background-tasks.md",
+        "tutorial/background-tasks.md",
+        "tutorial/background-tasks.md"
+      ]
+    },
+    {
+      "id": 23,
+      "question": "What tool do the FastAPI docs recommend for testing, and what is it based on?",
+      "expected_source": "tutorial/testing.md",
+      "hit": true,
+      "rank": 5,
+      "retrieved_sources": [
+        "alternatives.md",
+        "index.md",
+        "index.md",
+        "deployment/index.md",
+        "tutorial/testing.md"
+      ]
+    },
+    {
+      "id": 24,
+      "question": "What extra package needs to be installed to use WebSockets in FastAPI?",
+      "expected_source": "advanced/websockets.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "advanced/websockets.md",
+        "reference/websockets.md",
+        "advanced/websockets.md",
+        "advanced/websockets.md",
+        "reference/websockets.md"
+      ]
+    },
+    {
+      "id": 25,
+      "question": "What is the 'lifespan' parameter on a FastAPI app used for?",
+      "expected_source": "advanced/events.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "advanced/events.md",
+        "advanced/events.md",
+        "release-notes.md",
+        "release-notes.md",
+        "advanced/events.md"
+      ]
+    },
+    {
+      "id": 26,
+      "question": "What package do the FastAPI docs recommend for reading and validating settings from environment variables?",
+      "expected_source": "advanced/settings.md",
+      "hit": true,
+      "rank": 2,
+      "retrieved_sources": [
+        "environment-variables.md",
+        "advanced/settings.md",
+        "virtual-environments.md",
+        "how-to/conditional-openapi.md",
+        "advanced/settings.md"
+      ]
+    },
+    {
+      "id": 27,
+      "question": "How do you tell FastAPI to use a specific Response subclass for a path operation?",
+      "expected_source": "advanced/custom-response.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "advanced/custom-response.md",
+        "reference/response.md",
+        "reference/responses.md",
+        "advanced/custom-response.md",
+        "advanced/response-directly.md"
+      ]
+    },
+    {
+      "id": 28,
+      "question": "What command does a typical FastAPI Dockerfile use to start the app inside the container?",
+      "expected_source": "deployment/docker.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "deployment/docker.md",
+        "deployment/docker.md",
+        "deployment/docker.md",
+        "deployment/docker.md",
+        "fastapi-cli.md"
+      ]
+    },
+    {
+      "id": 29,
+      "question": "Name two core concepts you need to think through when deploying a FastAPI application.",
+      "expected_source": "deployment/concepts.md",
+      "hit": true,
+      "rank": 2,
+      "retrieved_sources": [
+        "deployment/index.md",
+        "deployment/concepts.md",
+        "deployment/index.md",
+        "deployment/docker.md",
+        "tutorial/first-steps.md"
+      ]
+    },
+    {
+      "id": 30,
+      "question": "Why can a single IP address traditionally only serve one HTTPS certificate, and what fixes this?",
+      "expected_source": "deployment/https.md",
+      "hit": true,
+      "rank": 1,
+      "retrieved_sources": [
+        "deployment/https.md",
+        "deployment/https.md",
+        "deployment/https.md",
+        "deployment/https.md",
+        "deployment/https.md"
+      ]
+    }
+  ]
+}

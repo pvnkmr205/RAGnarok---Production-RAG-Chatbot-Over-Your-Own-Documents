@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "topic": "overview",
+    "question": "What is FastAPI built on top of?",
+    "expected_answer": "FastAPI is built on Starlette for the web-handling parts and Pydantic for the data validation and parsing parts.",
+    "source_file": "index.md"
+  },
+  {
+    "id": 2,
+    "topic": "overview",
+    "question": "Why is FastAPI described as high performance?",
+    "expected_answer": "Because it's built on Starlette and Pydantic, independent benchmarks place FastAPI among the fastest Python frameworks available, on par with NodeJS and Go.",
+    "source_file": "index.md"
+  },
+  {
+    "id": 3,
+    "topic": "overview",
+    "question": "What two open API standards is FastAPI fully compatible with?",
+    "expected_answer": "OpenAPI (formerly known as Swagger) and JSON Schema.",
+    "source_file": "index.md"
+  },
+  {
+    "id": 4,
+    "topic": "first-steps",
+    "question": "What's the minimum needed to create and run a FastAPI app locally?",
+    "expected_answer": "Create a FastAPI() app instance in a file like main.py, define path operations with decorators, then start a dev server (e.g. the 'fastapi dev' command), which runs Uvicorn underneath.",
+    "source_file": "tutorial/first-steps.md"
+  },
+  {
+    "id": 5,
+    "topic": "path-params",
+    "question": "How do you add type validation to a path parameter?",
+    "expected_answer": "Give the function parameter a standard Python type annotation, e.g. item_id: int. FastAPI automatically parses the incoming string and validates it against that type.",
+    "source_file": "tutorial/path-params.md"
+  },
+  {
+    "id": 6,
+    "topic": "path-params",
+    "question": "What happens if a client sends a value that cannot be converted to a path parameter's declared type?",
+    "expected_answer": "FastAPI returns an HTTP error response describing the validation failure, instead of calling your path operation function.",
+    "source_file": "tutorial/path-params.md"
+  },
+  {
+    "id": 7,
+    "topic": "path-params",
+    "question": "Which FastAPI function adds metadata and numeric validation constraints to a path parameter?",
+    "expected_answer": "Path(), imported from fastapi, used the same way Query() is used for query parameters.",
+    "source_file": "tutorial/path-params-numeric-validations.md"
+  },
+  {
+    "id": 8,
+    "topic": "query-params",
+    "question": "How does FastAPI decide a function parameter is a query parameter rather than a path parameter?",
+    "expected_answer": "Any function parameter that is not declared as part of the URL path is automatically treated as a query parameter.",
+    "source_file": "tutorial/query-params.md"
+  },
+  {
+    "id": 9,
+    "topic": "query-params",
+    "question": "How do you enforce a maximum length on an optional string query parameter?",
+    "expected_answer": "Import Query from fastapi and use it as the parameter's default with the max_length argument, e.g. Query(default=None, max_length=50).",
+    "source_file": "tutorial/query-params-str-validations.md"
+  },
+  {
+    "id": 10,
+    "topic": "request-body",
+    "question": "How do you declare a request body in FastAPI?",
+    "expected_answer": "Define a class that inherits from Pydantic's BaseModel with typed attributes, then use that class as the type annotation of a path operation function parameter.",
+    "source_file": "tutorial/body.md"
+  },
+  {
+    "id": 11,
+    "topic": "responses",
+    "question": "What does the response_model parameter actually do?",
+    "expected_answer": "It filters and limits outgoing response data to only the fields defined in that model (important for security, since it prevents leaking extra fields), and it's also used to generate the OpenAPI schema and docs.",
+    "source_file": "tutorial/response-model.md"
+  },
+  {
+    "id": 12,
+    "topic": "responses",
+    "question": "How do you set a custom HTTP status code for a successful response?",
+    "expected_answer": "Pass the status_code parameter to the path operation decorator itself (e.g. @app.post(..., status_code=201)), not to the function.",
+    "source_file": "tutorial/response-status-code.md"
+  },
+  {
+    "id": 13,
+    "topic": "errors",
+    "question": "How do you return an error response like a 404 to the client?",
+    "expected_answer": "Raise an HTTPException (imported from fastapi) with the desired status_code. Because it's raised rather than returned, execution stops immediately.",
+    "source_file": "tutorial/handling-errors.md"
+  },
+  {
+    "id": 14,
+    "topic": "dependencies",
+    "question": "What is FastAPI's dependency injection system mainly used for?",
+    "expected_answer": "Sharing logic across path operations without repeating code -- e.g. shared database connections or enforcing authentication -- FastAPI calls the dependency and passes its result to whatever function needs it.",
+    "source_file": "tutorial/dependencies/index.md"
+  },
+  {
+    "id": 15,
+    "topic": "dependencies",
+    "question": "Besides plain functions, what else can be used as a FastAPI dependency?",
+    "expected_answer": "Any 'callable' object, including a class (since instantiating a class calls it). Classes are useful because editors can give type-aware autocomplete, unlike a plain dict.",
+    "source_file": "tutorial/dependencies/classes-as-dependencies.md"
+  },
+  {
+    "id": 16,
+    "topic": "dependencies",
+    "question": "Can a FastAPI dependency itself depend on another dependency?",
+    "expected_answer": "Yes -- dependencies can have sub-dependencies nested as deep as needed, and FastAPI resolves them in the correct order automatically.",
+    "source_file": "tutorial/dependencies/sub-dependencies.md"
+  },
+  {
+    "id": 17,
+    "topic": "security",
+    "question": "What security protocol does FastAPI use to implement username/password authentication between a frontend and backend?",
+    "expected_answer": "OAuth2, implemented using tools like OAuth2PasswordBearer combined with FastAPI's dependency injection system.",
+    "source_file": "tutorial/security/first-steps.md"
+  },
+  {
+    "id": 18,
+    "topic": "security",
+    "question": "What Python package do the FastAPI docs use to generate and verify JWT tokens?",
+    "expected_answer": "PyJWT.",
+    "source_file": "tutorial/security/oauth2-jwt.md"
+  },
+  {
+    "id": 19,
+    "topic": "security",
+    "question": "How does a get_current_user dependency typically determine the user's identity?",
+    "expected_answer": "It depends on the oauth2_scheme sub-dependency to receive the token, then looks up or decodes that token to return a Pydantic User model.",
+    "source_file": "tutorial/security/get-current-user.md"
+  },
+  {
+    "id": 20,
+    "topic": "middleware",
+    "question": "How do you create custom middleware in FastAPI?",
+    "expected_answer": "Use the @app.middleware('http') decorator on a function that receives the request and a call_next callable, letting you run code both before and after each request is processed.",
+    "source_file": "tutorial/middleware.md"
+  },
+  {
+    "id": 21,
+    "topic": "middleware",
+    "question": "How do you enable CORS for specific frontend origins in FastAPI?",
+    "expected_answer": "Add CORSMiddleware to the app, configured with an explicit list of allowed origins -- the '*' wildcard doesn't support credentials like cookies or Authorization headers.",
+    "source_file": "tutorial/cors.md"
+  },
+  {
+    "id": 22,
+    "topic": "background-tasks",
+    "question": "What FastAPI utility do you add as a path operation function parameter to schedule a fire-and-forget task, like sending an email, to run once the response has already been returned?",
+    "expected_answer": "Declare a BackgroundTasks parameter in the path operation function, then call its .add_task() method with the function to run afterward.",
+    "source_file": "tutorial/background-tasks.md"
+  },
+  {
+    "id": 23,
+    "topic": "testing",
+    "question": "What tool do the FastAPI docs recommend for testing, and what is it based on?",
+    "expected_answer": "TestClient, which is based on HTTPX. Tests are written as normal pytest functions using regular, non-async calls.",
+    "source_file": "tutorial/testing.md"
+  },
+  {
+    "id": 24,
+    "topic": "websockets",
+    "question": "What extra package needs to be installed to use WebSockets in FastAPI?",
+    "expected_answer": "The websockets package.",
+    "source_file": "advanced/websockets.md"
+  },
+  {
+    "id": 25,
+    "topic": "lifecycle",
+    "question": "What is the 'lifespan' parameter on a FastAPI app used for?",
+    "expected_answer": "Defining startup and shutdown logic -- code that runs once before the app starts accepting requests and once after it finishes handling them -- useful for setting up shared resources like a DB connection pool or a loaded ML model.",
+    "source_file": "advanced/events.md"
+  },
+  {
+    "id": 26,
+    "topic": "settings",
+    "question": "What package do the FastAPI docs recommend for reading and validating settings from environment variables?",
+    "expected_answer": "pydantic-settings, which lets you define a Settings class so environment variable strings are automatically converted and validated into proper types.",
+    "source_file": "advanced/settings.md"
+  },
+  {
+    "id": 27,
+    "topic": "responses",
+    "question": "How do you tell FastAPI to use a specific Response subclass for a path operation?",
+    "expected_answer": "Set the response_class parameter on the path operation decorator.",
+    "source_file": "advanced/custom-response.md"
+  },
+  {
+    "id": 28,
+    "topic": "deployment",
+    "question": "What command does a typical FastAPI Dockerfile use to start the app inside the container?",
+    "expected_answer": "The 'fastapi run' command (e.g. CMD [\"fastapi\", \"run\", \"app/main.py\", \"--port\", \"80\"]), optionally adding --proxy-headers when running behind a reverse proxy like Nginx.",
+    "source_file": "deployment/docker.md"
+  },
+  {
+    "id": 29,
+    "topic": "deployment",
+    "question": "Name two core concepts you need to think through when deploying a FastAPI application.",
+    "expected_answer": "Any two of: HTTPS/security, running on startup, restarts, replication (number of processes), memory usage, and steps to run before starting.",
+    "source_file": "deployment/concepts.md"
+  },
+  {
+    "id": 30,
+    "topic": "deployment",
+    "question": "Why can a single IP address traditionally only serve one HTTPS certificate, and what fixes this?",
+    "expected_answer": "Because TCP-level encryption happens before HTTP, and TCP only knows about IP addresses, not domains. The SNI (Server Name Indication) TLS extension fixes this by letting one server present multiple HTTPS certificates for multiple domains from a single IP.",
+    "source_file": "deployment/https.md"
+  }
+]

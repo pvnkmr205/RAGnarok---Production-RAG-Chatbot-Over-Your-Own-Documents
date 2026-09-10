@@ -1,0 +1,65 @@
+{
+  "refusal_rate": 1.0,
+  "results": [
+    {
+      "id": 1,
+      "question": "What is the capital of France?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 2,
+      "question": "How do I bake a chocolate cake?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 3,
+      "question": "How do you implement rate limiting using Redis in a FastAPI application?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 4,
+      "question": "What is the latest version of FastAPI as of 2026?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 5,
+      "question": "How do I configure Sentry error tracking in a FastAPI app?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 6,
+      "question": "What is Django's ORM equivalent in FastAPI, and how do they compare?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 7,
+      "question": "How do you deploy a FastAPI app specifically on Heroku?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 8,
+      "question": "What is FastAPI's official policy on GDPR compliance?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 9,
+      "question": "Who is the current CEO of the company that maintains FastAPI?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    },
+    {
+      "id": 10,
+      "question": "What's the weather like in San Francisco today?",
+      "refused": true,
+      "answer": "I don't have enough information to answer that."
+    }
+  ]
+}
