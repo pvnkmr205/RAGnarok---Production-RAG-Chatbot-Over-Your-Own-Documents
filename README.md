@@ -1,4 +1,4 @@
-# RAGnarok — a production RAG chatbot over your own documents
+# RAGnarok - a production RAG chatbot over your own documents
 
 A retrieval-augmented chatbot that answers questions strictly from documents you give it — PDF, DOCX, HTML, Markdown, or plain text — with page-level citations back to the source and a measured evaluation of how good its answers actually are. Upload a file through the UI (or point the CLI at one), and it becomes a chatbot for that content, and only that content.
 
