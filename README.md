@@ -16,7 +16,6 @@ A retrieval-augmented chatbot that answers questions strictly from documents you
 - [x] Checkpoint 7 — FastAPI wrapper (`/ask` `/corpus` `/health`) + in-memory caching + token cost tracking
 - [x] Checkpoint 8 — Streamlit UI with real file upload, Dockerized, deployed
 - [x] Generalized ingestion to any file (PDF/DOCX/HTML/Markdown/text), not just the reference corpus
-- [ ] Demo video
 
 ## What it is
 
